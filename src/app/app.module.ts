@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';  // Seu arquivo de configuração do Firebase
+import { CommonModule } from '@angular/common';
+import { AppComponent } from './app.component';  // Importar o AppComponent
+import { bootstrapApplication } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
+// Não há necessidade de declarar o AppComponent no NgModule, pois ele é standalone
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AngularFireModule.initializeApp(environment.firebase),  // Configuração do Firebase
+    AngularFireAuthModule,
+    CommonModule  // Adicionar CommonModule para usar ngIf
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: []
 })
-export class AppModule { }
+export class AppModule {}
+
+// Inicializando a aplicação com o bootstrapApplication
+bootstrapApplication(AppComponent);

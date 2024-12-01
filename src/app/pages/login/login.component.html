@@ -1,0 +1,11 @@
+<div *ngIf="user">
+    <p>Bem-vindo, {{ user?.displayName }}!</p>
+    <button (click)="logout()">Sair</button>
+  </div>
+  
+  
+  <ng-template #loginForm>
+    <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+    <button (click)="loginWithGoogle()">Login com Google</button>
+  </ng-template>
+  

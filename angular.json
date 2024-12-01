@@ -21,14 +21,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser", 
           "options": {
             "outputPath": "dist/plataforma-videos",
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "main": "src/main.ts", 
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -55,7 +53,13 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -67,12 +71,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "plataforma-videos:build"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "plataforma-videos:build:production"
+              "browserTarget": "plataforma-videos:build:production"
             },
             "development": {
-              "buildTarget": "plataforma-videos:build:development"
+              "browserTarget": "plataforma-videos:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,5 +109,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "15bda5f5-8682-44f0-8d93-ec6b5ea59f15"
   }
 }
